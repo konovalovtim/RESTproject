@@ -26,14 +26,10 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public List<Client> readAll() {
-        return new ArrayList<>(CLIENT_REPOSITORY_MAP.values());
-    }
+    public List<Client> readAll() { return new ArrayList<>(CLIENT_REPOSITORY_MAP.values()); }
 
     @Override
-    public Client read(int id) {
-        return CLIENT_REPOSITORY_MAP.get(id);
-    }
+    public Client read(int id) { return CLIENT_REPOSITORY_MAP.get(id); }
 
     @Override
     public boolean update(Client client, int id) {
@@ -42,12 +38,9 @@ public class ClientServiceImpl implements ClientService {
             CLIENT_REPOSITORY_MAP.put(id, client);
             return true;
         }
-
         return false;
     }
 
     @Override
-    public boolean delete(int id) {
-        return CLIENT_REPOSITORY_MAP.remove(id) != null;
-    }
+    public boolean delete(int id) { return CLIENT_REPOSITORY_MAP.remove(id) != null; }
 }
