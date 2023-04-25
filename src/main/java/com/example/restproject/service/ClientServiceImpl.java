@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
-//@Api(description = "Класс для реализации REST методов")
 public class ClientServiceImpl implements ClientService {
 
     // Хранилище клиентов
@@ -17,20 +16,16 @@ public class ClientServiceImpl implements ClientService {
 
     // Переменная для генерации ID клиента
     private static final AtomicInteger CLIENT_ID_HOLDER = new AtomicInteger();
-//    @ApiOperation(value = "реализация POST запроса")
     @Override
     public void create(Client client) {
         final int clientId = CLIENT_ID_HOLDER.incrementAndGet();
         client.setId(clientId);
         CLIENT_REPOSITORY_MAP.put(clientId, client);
     }
-//    @ApiOperation(value = "реализация GET запроса")
     @Override
     public List<Client> readAll() { return new ArrayList<>(CLIENT_REPOSITORY_MAP.values()); }
-//    @ApiOperation(value = "обработка GET запроса c id")
     @Override
     public Client read(int id) { return CLIENT_REPOSITORY_MAP.get(id); }
-//    @ApiOperation(value = "реализация PUT запроса")
     @Override
     public boolean update(Client client, int id) {
         if (CLIENT_REPOSITORY_MAP.containsKey(id)) {
@@ -40,7 +35,6 @@ public class ClientServiceImpl implements ClientService {
         }
         return false;
     }
-//    @ApiOperation(value = "реализация DELETE запроса")
     @Override
     public boolean delete(int id) { return CLIENT_REPOSITORY_MAP.remove(id) != null; }
 }
