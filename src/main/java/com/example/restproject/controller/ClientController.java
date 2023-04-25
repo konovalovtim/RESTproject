@@ -33,7 +33,6 @@ public class ClientController {
     передаем ему принятого в параметрах контроллера клиента.
     После чего возвращаем статус 201 CREATED. */
     @Operation(summary = "Сохранение пользователя", tags = { "Clients" })
-    @NotBlank
     @PostMapping(value = "/clients")
     public ResponseEntity<?> create(@RequestBody Client client) {
         clientService.create(client);
@@ -45,7 +44,6 @@ public class ClientController {
     Далее, в случае если список не null и не пуст, мы возвращаем c помощью класса ResponseEntity
     сам список клиентов и HTTP статус 200 OK. Иначе мы возвращаем просто HTTP статус 404 Not Found. */
     @Operation(summary = "Вывести всех клиентов", tags = { "Clients" })
-    @NotBlank
     @GetMapping(value = "/clients")
     public ResponseEntity<List<Client>> read() {
         final List<Client> clients = clientService.readAll();
