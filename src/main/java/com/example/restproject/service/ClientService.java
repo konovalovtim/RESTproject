@@ -18,6 +18,7 @@ public interface ClientService {
      true если данные были обновлены, иначе false */
     boolean update(Client client, int id);
 
-    /* Удаляет клиента с заданным ID, true если клиент был удален, иначе false */
+    /**
+     * Удаляет клиента с заданным IDtrue если клиент был удален, иначе false */
     boolean delete(int id);
 }
