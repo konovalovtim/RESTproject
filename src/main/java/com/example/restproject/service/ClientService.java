@@ -1,23 +1,46 @@
 package com.example.restproject.service;
 
 import com.example.restproject.model.Client;
+import com.example.restproject.repository.ClientRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+/* Реализация JPA интерфейса JpaRepository */
+@Service
+public class ClientService {
 
-public interface ClientService {
-    /* Создает нового клиента */
-    void create(Client client);
+    private final ClientRepository clientRepository;
 
-    /* Возвращает список всех имеющихся клиентов */
-    List<Client> readAll();
+    public ClientService(ClientRepository clientRepository) {
+        this.clientRepository = clientRepository;
+    }
 
-    /* Возвращает клиента по его ID */
-    Client read(int id);
+    public void create(Client client) {
+        clientRepository.save(client);
+    }
 
-    /* Обновляет клиента с заданным ID, в соответствии с переданным клиентом,
-     true если данные были обновлены, иначе false */
-    boolean update(Client client, int id);
+    public List<Client> readAll() {
+        return clientRepository.findAll();
+    }
 
-    /* Удаляет клиента с заданным IDtrue если клиент был удален, иначе false */
-    boolean delete(int id);
+    public Client read(int id) {
+        return clientRepository.getOne(id);
+    }
+
+    public boolean update(Client client, int id) {
+        if (clientRepository.existsById(id)) {
+            client.setId(id);
+            clientRepository.save(client);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean delete(int id) {
+        if (clientRepository.existsById(id)) {
+            clientRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }

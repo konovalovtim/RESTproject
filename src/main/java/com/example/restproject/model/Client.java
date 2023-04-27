@@ -8,7 +8,10 @@ import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
-// @Entity — указывает, что данный класс является сущностью.
+/* @Entity — указывает, что данный класс является сущностью.
+@JsonIgnoreProperties - для того чтобы избавиться от ленивой инициализации -
+(Хибернейт использует прокси классы для ленивой загрузки данных (т.е. по необходимости, а не сразу))
+@XmlAccessorType задает, что доступ будет осуществляться непосредственно к полям (не нужно делать getter-ов) */
 @Entity
 @Table(name = "clients")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -16,9 +19,10 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Client {
 
-    // @Id - первичный ключ
-    // @GeneratedValue — указывает, что данное свойство будет создаваться согласно указанной стратегии.
-    // @SequenceGenerator - генератор последовательности
+    /* @Id - первичный ключ
+    @GeneratedValue — указывает, что данное свойство будет создаваться согласно указанной стратегии -
+    (запред создания одинаковых id).
+    @SequenceGenerator - генератор последовательности */
     @Id
     @Column(name = "id")
     @SequenceGenerator(name = "clientsIdSeq", sequenceName = "clients_id_seq", allocationSize = 1)
@@ -26,7 +30,7 @@ public class Client {
     @JsonProperty("id")
     private Integer id;
 
-    // @Column — указывает на имя колонки.
+    /* @Column — указывает на имя колонки. */
     @Column(name = "name")
     @JsonProperty("name")
     private String name;
