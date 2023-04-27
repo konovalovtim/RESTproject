@@ -1,7 +1,7 @@
 package com.example.restproject.repository;
 
 
-import com.example.restproject.model.Client;
+import com.example.restproject.model.entity.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /* Интерфейс для взаимодействия с БД.

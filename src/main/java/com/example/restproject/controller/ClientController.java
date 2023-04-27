@@ -1,6 +1,6 @@
 package com.example.restproject.controller;
 
-import com.example.restproject.model.Client;
+import com.example.restproject.model.entity.Client;
 import com.example.restproject.service.ClientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -1,6 +1,6 @@
 package com.example.restproject.service;
 
-import com.example.restproject.model.Client;
+import com.example.restproject.model.entity.Client;
 import com.example.restproject.repository.ClientRepository;
 import org.springframework.stereotype.Service;
 
