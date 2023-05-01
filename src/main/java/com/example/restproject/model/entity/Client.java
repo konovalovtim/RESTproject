@@ -2,8 +2,12 @@ package com.example.restproject.model.entity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.ToString;
 
 /* @Entity — указывает, что данный класс является сущностью */
+@Data
+@ToString
 @Entity
 @Table(name = "clients")
 public class Client {
