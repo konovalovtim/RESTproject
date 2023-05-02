@@ -1,5 +1,7 @@
 package com.example.restproject.controller;
 
+import com.example.restproject.model.ClientMapper;
+import com.example.restproject.model.dto.ClientDTO;
 import com.example.restproject.model.entity.Client;
 import com.example.restproject.service.ClientService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,6 +19,8 @@ import java.util.List;
 public class ClientController {
     private final ClientService clientService;
 
+    private ClientMapper clientMapper;
+
     /* @Autowired — говорит спрингу, что в этом месте необходимо внедрить зависимость.
     Реализацию ClientService мы пометили аннотацией @Service ранее,
     и теперь спринг сможет передать экземпляр этой реализации в конструктор контроллера. */
@@ -33,8 +37,8 @@ public class ClientController {
     После чего возвращаем статус 201 CREATED. */
     @Operation(summary = "Сохранение пользователя", tags = {"Clients"})
     @PostMapping(value = "/clients")
-    public ResponseEntity<?> create(@RequestBody Client client) {
-        clientService.create(client);
+    public ResponseEntity<?> put(@RequestBody ClientDTO clientDTO) {
+        clientService.put(clientDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -44,9 +48,9 @@ public class ClientController {
     сам список клиентов и HTTP статус 200 OK. Иначе мы возвращаем просто HTTP статус 404 Not Found. */
     @Operation(summary = "Вывести всех клиентов", tags = {"Clients"})
     @GetMapping(value = "/clients")
-    public ResponseEntity<List<Client>> read() {
-        final List<Client> clients = clientService.readAll();
-        return clients != null && !clients.isEmpty() ? new ResponseEntity<>(clients, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<List<ClientDTO>> getAll() {
+        final List<ClientDTO> clientsDTO = clientService.getAll();
+        return clientsDTO != null && !clientsDTO.isEmpty() ? new ResponseEntity<>(clientsDTO, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     /* Переменная value = "/clients/{id}", которая определена в URI,
@@ -55,9 +59,9 @@ public class ClientController {
     Данное значение, впоследствии, передается переменной int id — параметру метода. */
     @Operation(summary = "Вывести клиента по id", tags = {"Clients"})
     @GetMapping(value = "/clients/{id}")
-    public ResponseEntity<Client> read(@PathVariable(name = "id") int id) {
-        final Client client = clientService.read(id);
-        return client != null ? new ResponseEntity<>(client, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<ClientDTO> getById(@PathVariable(name = "id") int id) {
+        final ClientDTO clientDTO = clientService.getById(id);
+        return clientDTO != null ? new ResponseEntity<>(clientDTO, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     /* метод update обрабатывает PUT запросы (аннотация @PutMapping) */

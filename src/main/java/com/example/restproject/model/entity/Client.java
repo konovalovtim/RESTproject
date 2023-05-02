@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.ToString;
 
 /* @Entity — указывает, что данный класс является сущностью */
-@Data
-@ToString
 @Entity
 @Table(name = "clients")
 public class Client {
@@ -19,9 +17,11 @@ public class Client {
 
     /* @Column — указывает на имя колонки. */
     @Column(name = "name")
+    @Schema(example = "Tom")
     private String name;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, unique = true)
+    @Schema(example = "tom@mail.com")
     private String email;
 
     @Schema(example = "1")
@@ -33,7 +33,6 @@ public class Client {
         this.id = id;
     }
 
-    @Schema(example = "Tom")
     public String getName() {
         return name;
     }
@@ -42,7 +41,6 @@ public class Client {
         this.name = name;
     }
 
-    @Schema(example = "tom@mail.com")
     public String getEmail() {
         return email;
     }
