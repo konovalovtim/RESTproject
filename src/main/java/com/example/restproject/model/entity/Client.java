@@ -8,6 +8,7 @@ import lombok.ToString;
 /* @Entity — указывает, что данный класс является сущностью */
 @Entity
 @Table(name = "clients")
+@Data
 public class Client {
 
     /* @Id - первичный ключ */
