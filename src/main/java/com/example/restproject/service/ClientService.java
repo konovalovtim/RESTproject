@@ -24,7 +24,11 @@ public class ClientService {
     }
 
     public Client getById(int id) {
-        return clientRepository.getOne(id);
+        return clientRepository.getById(id);
+    }
+
+    public Client findByName(String name) {
+        return clientRepository.findByName(name);
     }
 
     public boolean put(Client client, int id) {
