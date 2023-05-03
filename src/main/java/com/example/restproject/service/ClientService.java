@@ -15,7 +15,7 @@ public class ClientService {
         this.clientRepository = clientRepository;
     }
 
-    public void put(Client client) {
+    public void post(Client client) {
         clientRepository.save(client);
     }
 
@@ -27,7 +27,7 @@ public class ClientService {
         return clientRepository.getOne(id);
     }
 
-    public boolean update(Client client, int id) {
+    public boolean put(Client client, int id) {
         if (clientRepository.existsById(id)) {
             client.setId(id);
             clientRepository.save(client);
