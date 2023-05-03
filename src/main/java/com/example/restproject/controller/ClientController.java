@@ -34,7 +34,7 @@ public class ClientController {
     @Operation(summary = "Сохранение пользователя", tags = {"Clients"})
     @PostMapping(value = "/clients")
     public ResponseEntity<?> create(@RequestBody Client client) {
-        clientService.create(client);
+        clientService.put(client);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -44,8 +44,8 @@ public class ClientController {
     сам список клиентов и HTTP статус 200 OK. Иначе мы возвращаем просто HTTP статус 404 Not Found. */
     @Operation(summary = "Вывести всех клиентов", tags = {"Clients"})
     @GetMapping(value = "/clients")
-    public ResponseEntity<List<Client>> read() {
-        final List<Client> clients = clientService.readAll();
+    public ResponseEntity<List<Client>> get() {
+        final List<Client> clients = clientService.get();
         return clients != null && !clients.isEmpty() ? new ResponseEntity<>(clients, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
@@ -55,8 +55,8 @@ public class ClientController {
     Данное значение, впоследствии, передается переменной int id — параметру метода. */
     @Operation(summary = "Вывести клиента по id", tags = {"Clients"})
     @GetMapping(value = "/clients/{id}")
-    public ResponseEntity<Client> read(@PathVariable(name = "id") int id) {
-        final Client client = clientService.read(id);
+    public ResponseEntity<Client> getById(@PathVariable(name = "id") int id) {
+        final Client client = clientService.getById(id);
         return client != null ? new ResponseEntity<>(client, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 

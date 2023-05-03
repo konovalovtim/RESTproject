@@ -15,15 +15,15 @@ public class ClientService {
         this.clientRepository = clientRepository;
     }
 
-    public void create(Client client) {
+    public void put(Client client) {
         clientRepository.save(client);
     }
 
-    public List<Client> readAll() {
+    public List<Client> get() {
         return clientRepository.findAll();
     }
 
-    public Client read(int id) {
+    public Client getById(int id) {
         return clientRepository.getOne(id);
     }
 
