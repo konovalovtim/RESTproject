@@ -31,7 +31,7 @@ public class ClientController {
     }
 
     @Operation(summary = "Вывести всех клиентов", tags = {"Clients"})
-    @GetMapping("/clients")
+    @GetMapping(value = "/clients")
     public ResponseEntity<List<ClientDTO>> showAllClients() {
         final List<Client> clients = clientService.get();
         return clients != null && !clients.isEmpty()
@@ -40,8 +40,8 @@ public class ClientController {
     }
 
     @Operation(summary = "Вывести клиента по id", tags = {"Clients"})
-    @GetMapping("/clients/{id}")
-    public ResponseEntity<ClientDTO> getClientById(@PathVariable(name = "id") int id) {
+    @GetMapping(value = "/clients/{id}")
+    public ResponseEntity<ClientDTO> getClientById(@PathVariable(name = "id") Integer id) {
         final Client client = clientService.getById(id);
         return client != null
                 ? new ResponseEntity<>(ClientMapper.INSTANCE.mapDto(client), HttpStatus.OK)
@@ -49,7 +49,7 @@ public class ClientController {
     }
 
     @Operation(summary = "Вывести клиента по name", tags = {"Clients"})
-    @GetMapping("/clients/{name}")
+    @GetMapping(value = "/clients/name/{name}")
     public ResponseEntity<ClientDTO> getClientByName(@PathVariable(name = "name") String name) {
         final Client client = clientService.findByName(name);
         return client != null
@@ -59,14 +59,14 @@ public class ClientController {
 
     @Operation(summary = "Изменить данные клиентов", tags = {"Clients"})
     @PutMapping(value = "/clients/{id}")
-    public ResponseEntity<?> ChangeClientData(@PathVariable(name = "id") int id, @RequestBody Client client) {
+    public ResponseEntity<?> ChangeClientData(@PathVariable(name = "id") Integer id, @RequestBody Client client) {
         final boolean puted = clientService.put(client, id);
         return puted ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
     @Operation(summary = "Удалить клиента по id", tags = {"Clients"})
     @DeleteMapping(value = "/clients/{id}")
-    public ResponseEntity<?> deleteClientById(@PathVariable(name = "id") int id) {
+    public ResponseEntity<?> deleteClientById(@PathVariable(name = "id") Integer id) {
         final boolean deleted = clientService.delete(id);
         return deleted ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
