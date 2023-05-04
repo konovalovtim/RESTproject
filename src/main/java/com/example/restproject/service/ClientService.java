@@ -2,18 +2,17 @@ package com.example.restproject.service;
 
 import com.example.restproject.model.entity.Client;
 import com.example.restproject.repository.ClientRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 /* Реализация JPA интерфейса JpaRepository */
 @Service
+@RequiredArgsConstructor
 public class ClientService {
 
     private final ClientRepository clientRepository;
-
-    public ClientService(ClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
-    }
 
     public void post(Client client) {
         clientRepository.save(client);

@@ -59,7 +59,7 @@ public class ClientController {
 
     @Operation(summary = "Изменить данные клиентов", tags = {"Clients"})
     @PutMapping(value = "/clients/{id}")
-    public ResponseEntity<?> ChangeClientData(@PathVariable(name = "id") Integer id, @RequestBody Client client) {
+    public ResponseEntity<?> сhangeClientData(@PathVariable(name = "id") Integer id, @RequestBody Client client) {
         final boolean puted = clientService.put(client, id);
         return puted ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
