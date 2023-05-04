@@ -24,7 +24,7 @@ public class ClientService {
     }
 
     public Client getById(int id) {
-        return clientRepository.getById(id);
+        return clientRepository.getReferenceById(id);
     }
 
     public Client findByName(String name) {
