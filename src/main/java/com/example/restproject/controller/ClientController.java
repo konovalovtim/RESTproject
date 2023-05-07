@@ -23,49 +23,40 @@ public class ClientController {
 
     @Operation(summary = "Сохранение пользователя", tags = {"Clients"})
     @PostMapping(value = "/clients")
-    public ResponseEntity<?> createClient(@RequestBody ClientDTO clientDTO) {
+    public void createClient(@RequestBody ClientDTO clientDTO) {
         clientService.post(ClientMapper.INSTANCE.map(clientDTO));
-        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @Operation(summary = "Вывести всех клиентов", tags = {"Clients"})
     @GetMapping(value = "/clients")
-    public ResponseEntity<List<ClientDTO>> showAllClients() {
+    public List<ClientDTO> showAllClients() {
         final List<Client> clients = clientService.get();
-        return clients != null && !clients.isEmpty()
-                ? new ResponseEntity<>(ClientMapper.INSTANCE.mapListDto(clients), HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return ClientMapper.INSTANCE.mapListDto(clients);
     }
 
     @Operation(summary = "Вывести клиента по id", tags = {"Clients"})
     @GetMapping(value = "/clients/{id}")
-    public ResponseEntity<ClientDTO> getClientById(@PathVariable(name = "id") Integer id) {
+    public ClientDTO getClientById(@PathVariable(name = "id") Integer id) {
         final Client client = clientService.getById(id);
-        return client != null
-                ? new ResponseEntity<>(ClientMapper.INSTANCE.mapDto(client), HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return ClientMapper.INSTANCE.mapDto(client);
     }
 
     @Operation(summary = "Вывести клиента по name", tags = {"Clients"})
     @GetMapping(value = "/clients/name/{name}")
-    public ResponseEntity<ClientDTO> getClientByName(@PathVariable(name = "name") String name) {
+    public ClientDTO getClientByName(@PathVariable(name = "name") String name) {
         final Client client = clientService.findByName(name);
-        return client != null
-                ? new ResponseEntity<>(ClientMapper.INSTANCE.mapDto(client), HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return ClientMapper.INSTANCE.mapDto(client);
     }
 
     @Operation(summary = "Изменить данные клиентов", tags = {"Clients"})
     @PutMapping(value = "/clients/{id}")
-    public ResponseEntity<?> сhangeClientData(@PathVariable(name = "id") Integer id, @RequestBody ClientDTO clientDto) {
-        final boolean puted = clientService.put(ClientMapper.INSTANCE.map(clientDto), id);
-        return puted ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+    public void сhangeClientData(@PathVariable(name = "id") Integer id, @RequestBody ClientDTO clientDto) {
+        clientService.put(ClientMapper.INSTANCE.map(clientDto), id);
     }
 
     @Operation(summary = "Удалить клиента по id", tags = {"Clients"})
     @DeleteMapping(value = "/clients/{id}")
-    public ResponseEntity<?> deleteClientById(@PathVariable(name = "id") Integer id) {
-        final boolean deleted = clientService.delete(id);
-        return deleted ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+    public void deleteClientById(@PathVariable(name = "id") Integer id) {
+        clientService.delete(id);
     }
 }
