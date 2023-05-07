@@ -13,23 +13,23 @@ public class ClientService {
 
     private final ClientRepository clientRepository;
 
-    public void post(Client client) {
+    public void createNewClient(Client client) {
         clientRepository.save(client);
     }
 
-    public List<Client> get() {
+    public List<Client> displayAllClients() {
         return clientRepository.findAll();
     }
 
-    public Client getById(int id) {
+    public Client getOneClientById(int id) {
         return clientRepository.getReferenceById(id);
     }
 
-    public Client findByName(String name) {
+    public Client getOneClientByName(String name) {
         return clientRepository.findByName(name);
     }
 
-    public boolean put(Client client, int id) {
+    public boolean сhangeClientDataById(Client client, int id) {
         if (clientRepository.existsById(id)) {
             client.setId(id);
             clientRepository.save(client);
@@ -38,7 +38,7 @@ public class ClientService {
         return false;
     }
 
-    public boolean delete(int id) {
+    public boolean deleteOneClientById(int id) {
         if (clientRepository.existsById(id)) {
             clientRepository.deleteById(id);
             return true;
