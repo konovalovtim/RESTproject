@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/* Реализация JPA интерфейса JpaRepository */
 @Service
 @RequiredArgsConstructor
 public class ClientService {

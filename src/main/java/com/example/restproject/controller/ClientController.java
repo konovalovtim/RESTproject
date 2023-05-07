@@ -6,6 +6,7 @@ import com.example.restproject.mapper.ClientMapper;
 import com.example.restproject.service.ClientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +16,10 @@ import java.util.List;
 
 @RestController
 @Tag(name = "Clients")
+@RequiredArgsConstructor
 public class ClientController {
-    private ClientService clientService;
 
-    @Autowired
-    public ClientController(ClientService clientService) {
-        this.clientService = clientService;
-    }
+    private final ClientService clientService;
 
     @Operation(summary = "Сохранение пользователя", tags = {"Clients"})
     @PostMapping(value = "/clients")
@@ -59,8 +57,8 @@ public class ClientController {
 
     @Operation(summary = "Изменить данные клиентов", tags = {"Clients"})
     @PutMapping(value = "/clients/{id}")
-    public ResponseEntity<?> сhangeClientData(@PathVariable(name = "id") Integer id, @RequestBody Client client) {
-        final boolean puted = clientService.put(client, id);
+    public ResponseEntity<?> сhangeClientData(@PathVariable(name = "id") Integer id, @RequestBody ClientDTO clientDto) {
+        final boolean puted = clientService.put(ClientMapper.INSTANCE.map(clientDto), id);
         return puted ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
