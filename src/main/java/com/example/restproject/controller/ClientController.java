@@ -24,7 +24,6 @@ public class ClientController {
 
     private static Logger logger = LoggerFactory.getLogger(ClientController.class);
 
-
     @Operation(summary = "Сохранение пользователя", tags = {"Clients"})
     @PostMapping(value = "/clients")
     public void createClient(@RequestBody ClientDTO clientDTO) {
