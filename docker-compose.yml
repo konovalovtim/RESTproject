@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  postgres:
+    image: 'postgres:14.7'
+    container_name: 'restproject-postgres'
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=assql
+      - POSTGRES_DB=postgres
+
+  app:
+    build: ./
+    container_name: 'restproject'
+    ports:
+      - 8080:8080

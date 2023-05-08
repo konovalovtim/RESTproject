@@ -4,14 +4,15 @@ import com.example.restproject.model.dto.ClientDTO;
 import com.example.restproject.model.entity.Client;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Generated;
 import org.springframework.stereotype.Component;
 
+/*
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-05-08T10:37:19+0300",
+    date = "2023-05-08T17:30:48+0300",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 17.0.1 (Oracle Corporation)"
 )
+*/
 @Component
 public class ClientMapperImpl implements ClientMapper {
 

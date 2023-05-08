@@ -1,0 +1,8 @@
+com/example/restproject/mapper/ClientMapperImpl.class
+com/example/restproject/service/ClientService.class
+com/example/restproject/mapper/ClientMapper.class
+com/example/restproject/model/dto/ClientDTO.class
+com/example/restproject/RESTprojectApplication.class
+com/example/restproject/model/entity/Client.class
+com/example/restproject/repository/ClientRepository.class
+com/example/restproject/controller/ClientController.class
