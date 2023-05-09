@@ -31,7 +31,7 @@ public class ClientController {
     @GetMapping(value = "/clients")
     public List<ClientDTO> showAllClients() {
         final List<Client> clients = clientService.displayAllClients();
-//        logger.info("all clients: " + clients.toString());
+        log.info("display all clients");
         return ClientMapper.INSTANCE.mapListDto(clients);
     }
 
@@ -39,7 +39,7 @@ public class ClientController {
     @GetMapping(value = "/clients/{id}")
     public ClientDTO getClientById(@PathVariable(name = "id") Integer id) {
         final Client client = clientService.getOneClientById(id);
-        log.info("client with id: " + id + " is: " + client.toString());
+        log.info("return from db client: " + client.toString());
         return ClientMapper.INSTANCE.mapDto(client);
     }
 
