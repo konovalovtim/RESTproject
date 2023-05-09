@@ -22,7 +22,7 @@ public class ClientController {
 
     @Operation(summary = "Сохранение пользователя", tags = {"Clients"})
     @PostMapping(value = "/clients")
-    public void createClient(@RequestBody ClientDTO clientDTO) {
+    public void createNewClient(@RequestBody ClientDTO clientDTO) {
         clientService.createNewClient(ClientMapper.INSTANCE.map(clientDTO));
         log.info("client: " + clientDTO.toString() + " add");
     }
@@ -30,7 +30,7 @@ public class ClientController {
     @Operation(summary = "Вывести всех клиентов", tags = {"Clients"})
     @GetMapping(value = "/clients")
     public List<ClientDTO> showAllClients() {
-        final List<Client> clients = clientService.displayAllClients();
+        final List<Client> clients = clientService.showAllClients();
         log.info("display all clients");
         return ClientMapper.INSTANCE.mapListDto(clients);
     }
@@ -38,7 +38,7 @@ public class ClientController {
     @Operation(summary = "Вывести клиента по id", tags = {"Clients"})
     @GetMapping(value = "/clients/{id}")
     public ClientDTO getClientById(@PathVariable(name = "id") Integer id) {
-        final Client client = clientService.getOneClientById(id);
+        final Client client = clientService.getClientById(id);
         log.info("return from db client: " + client.toString());
         return ClientMapper.INSTANCE.mapDto(client);
     }
@@ -46,7 +46,7 @@ public class ClientController {
     @Operation(summary = "Вывести клиента по name", tags = {"Clients"})
     @GetMapping(value = "/clients/name/{name}")
     public ClientDTO getClientByName(@PathVariable(name = "name") String name) {
-        final Client client = clientService.getOneClientByName(name);
+        final Client client = clientService.getClientByName(name);
         log.info("return from db client: " + client.toString());
         return ClientMapper.INSTANCE.mapDto(client);
     }
@@ -54,14 +54,14 @@ public class ClientController {
     @Operation(summary = "Изменить данные клиентов", tags = {"Clients"})
     @PutMapping(value = "/clients/{id}")
     public void сhangeClientData(@PathVariable(name = "id") Integer id, @RequestBody ClientDTO clientDto) {
-        clientService.сhangeClientDataById(ClientMapper.INSTANCE.map(clientDto), id);
+        clientService.сhangeClientData(ClientMapper.INSTANCE.map(clientDto), id);
         log.info("client data by id: " + id + " changed to: " + clientDto.toString());
     }
 
     @Operation(summary = "Удалить клиента по id", tags = {"Clients"})
     @DeleteMapping(value = "/clients/{id}")
     public void deleteClientById(@PathVariable(name = "id") Integer id) {
-        clientService.deleteOneClientById(id);
+        clientService.deleteClientById(id);
         log.info("remove client by id: " + id);
     }
 }
