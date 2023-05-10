@@ -1,32 +1,30 @@
-version: '3'
+version: '3.9'
 services:
   postgres:
-    container_name: 'restproject-postgres'
+#    container_name: 'restproject-postgres'
     image: postgres:latest
-    network_mode: bridge
-    expose:
-      - 5432
-    ports:
-      - 5432:5432
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=assql
       - POSTGRES_DB=postgres
-    restart: unless-stopped
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - ./database:/var/lib/postgresql/data
+      - ./migrate.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 5432:5432
 
   app:
-    container_name: 'restproject'
-    network_mode: bridge
+    depends_on:
+      - postgres
     build: ./
-    expose:
-      - 8080
-    ports:
-      - 8080:8080
-    restart: unless-stopped
+    restart: always
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql@postgres:5432/postgres
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/dockerdb
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=assql
       - PORT=8080
-    depends_on:
-      - postgres
+    ports:
+      - 8080:8080
+volumes:
+  postgres-data:
