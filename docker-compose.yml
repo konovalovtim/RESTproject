@@ -1,8 +1,9 @@
 version: '3.9'
 services:
-  postgres:
-#    container_name: 'restproject-postgres'
-    image: postgres:latest
+  db:
+    container_name: postgres_container
+    image: postgres
+    restart: always
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=assql
@@ -12,19 +13,18 @@ services:
       - ./database:/var/lib/postgresql/data
       - ./migrate.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - 5432:5432
+      - "5432:5432"
 
   app:
     depends_on:
-      - postgres
+      - db
     build: ./
+    container_name: restapp
+    image: rest_app
     restart: always
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/dockerdb
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=assql
-      - PORT=8080
+#    environment:
+#      db_url: jdbc:postgresql://172.25.0.2:5432/postgres
+#      db_username: root
+#      db_password: assql
     ports:
-      - 8080:8080
-volumes:
-  postgres-data:
+      - "8080:8080"
