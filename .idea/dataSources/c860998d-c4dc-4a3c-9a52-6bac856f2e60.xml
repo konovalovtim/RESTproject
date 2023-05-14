@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataSource name="postgres@postgres">
+<dataSource name="postgres@localhost">
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.48">
     <root id="1">
       <DateStyle>mdy</DateStyle>
@@ -10,14 +10,10 @@
 4||-9223372036854775808|c|G
 4||10|c|G
 4||10|C|G
-4||10|T|G
-13756||-9223372036854775808|c|G
-13756||10|c|G
-13756||10|C|G
-13756||10|T|G</Grants>
-      <IntrospectionStateNumber>739</IntrospectionStateNumber>
-      <ServerVersion>15.2</ServerVersion>
-      <StartupTime>1683631342</StartupTime>
+4||10|T|G</Grants>
+      <IntrospectionStateNumber>725</IntrospectionStateNumber>
+      <ServerVersion>15.3</ServerVersion>
+      <StartupTime>1684094238</StartupTime>
       <TimeZones>true ACDT
 true ACSST
 false ACST
@@ -1409,9 +1405,9 @@ true posixrules
 13186||10|C|G
 13186||-9223372036854775808|U|G
 13186||10|U|G</Grants>
-      <IntrospectionStateNumber>739</IntrospectionStateNumber>
+      <IntrospectionStateNumber>725</IntrospectionStateNumber>
       <ObjectId>5</ObjectId>
-      <OwnerName>root</OwnerName>
+      <OwnerName>postgres</OwnerName>
     </database>
     <role id="3" parent="1" name="pg_checkpoint">
       <ObjectId>4544</ObjectId>
@@ -1452,7 +1448,7 @@ true posixrules
     <role id="14" parent="1" name="pg_write_server_files">
       <ObjectId>4570</ObjectId>
     </role>
-    <role id="15" parent="1" name="root">
+    <role id="15" parent="1" name="postgres">
       <BypassRls>1</BypassRls>
       <CanLogin>1</CanLogin>
       <CreateDb>1</CreateDb>
@@ -1464,12 +1460,12 @@ true posixrules
     <tablespace id="16" parent="1" name="pg_default">
       <ObjectId>1663</ObjectId>
       <StateNumber>1</StateNumber>
-      <OwnerName>root</OwnerName>
+      <OwnerName>postgres</OwnerName>
     </tablespace>
     <tablespace id="17" parent="1" name="pg_global">
       <ObjectId>1664</ObjectId>
       <StateNumber>1</StateNumber>
-      <OwnerName>root</OwnerName>
+      <OwnerName>postgres</OwnerName>
     </tablespace>
     <access-method id="18" parent="2" name="brin">
       <Comment>block range index (BRIN) access method</Comment>
@@ -4811,72 +4807,21 @@ true posixrules
     <schema id="259" parent="2" name="information_schema">
       <ObjectId>13186</ObjectId>
       <StateNumber>524</StateNumber>
-      <OwnerName>root</OwnerName>
+      <OwnerName>postgres</OwnerName>
     </schema>
     <schema id="260" parent="2" name="pg_catalog">
       <Comment>system catalog schema</Comment>
       <ObjectId>11</ObjectId>
       <StateNumber>518</StateNumber>
-      <OwnerName>root</OwnerName>
+      <OwnerName>postgres</OwnerName>
     </schema>
     <schema id="261" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>739</IntrospectionStateNumber>
+      <IntrospectionStateNumber>725</IntrospectionStateNumber>
       <ObjectId>2200</ObjectId>
       <StateNumber>518</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
     </schema>
-    <sequence id="262" parent="261" name="clients_id_seq">
-      <DasType>bigint|0s</DasType>
-      <ObjectId>16393</ObjectId>
-      <SequenceIdentity>1(3)</SequenceIdentity>
-      <StartValue>3</StartValue>
-      <StateNumber>738</StateNumber>
-      <OwnerName>root</OwnerName>
-    </sequence>
-    <table id="263" parent="261" name="clients">
-      <ObjectId>16388</ObjectId>
-      <StateNumber>737</StateNumber>
-      <AccessMethodId>2</AccessMethodId>
-      <OwnerName>root</OwnerName>
-    </table>
-    <column id="264" parent="263" name="id">
-      <DasType>integer|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StateNumber>737</StateNumber>
-      <TypeId>23</TypeId>
-    </column>
-    <column id="265" parent="263" name="name">
-      <DasType>varchar(200)|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-      <StateNumber>737</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="266" parent="263" name="email">
-      <DasType>varchar(254)|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-      <StateNumber>737</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <index id="267" parent="263" name="clients_pkey">
-      <ColNames>id</ColNames>
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16391</ObjectId>
-      <Primary>1</Primary>
-      <StateNumber>737</StateNumber>
-      <Unique>1</Unique>
-      <AccessMethodId>403</AccessMethodId>
-    </index>
-    <key id="268" parent="263" name="clients_pkey">
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16392</ObjectId>
-      <Primary>1</Primary>
-      <StateNumber>737</StateNumber>
-      <UnderlyingIndexId>16391</UnderlyingIndexId>
-    </key>
   </database-model>
 </dataSource>

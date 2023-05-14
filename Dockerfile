@@ -1,3 +1,3 @@
 FROM openjdk:17
-ADD target/RESTproject-0.0.1-SNAPSHOT.jar restapp.jar
+ADD target/RESTproject-3.0.6.jar restapp.jar
 ENTRYPOINT ["java", "-jar", "restapp.jar"]
