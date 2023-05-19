@@ -1,3 +1,4 @@
 FROM openjdk:17
-ADD target/RESTproject-3.0.6.jar restapp.jar
+ENV POSTGRES localhost
+COPY target/RESTproject-1.jar restapp.jar
 ENTRYPOINT ["java", "-jar", "restapp.jar"]

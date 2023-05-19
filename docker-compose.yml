@@ -1,29 +1,32 @@
 version: '3.9'
 services:
   db:
-    container_name: postgres_container
+    container_name: db
     image: postgres
-    restart: always
+    ports:
+      - 5432:5432
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=postgres
-#    volumes:
-#      - ./database:/var/lib/postgresql/data
-#      - ./migrate.sql:/docker-entrypoint-initdb.d/init.sql
-    ports:
-      - "5432:5432"
+    volumes:
+      - database:/var/lib/postgresql/data
 
   app:
+    container_name: restapp
+    build:
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - 8080:8080
+    links:
+      - "db:database"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
     depends_on:
       - db
-    build: ./
-    container_name: restapp
-    image: rest_app
-    restart: always
-    environment:
-      POSTGRES_URL: jdbc:postgresql://localhost:5432/postgres
-      POSTGRES_USERNAME: postgres
-      POSTGRES_PASSWORD: postgres
-    ports:
-      - "8080:8080"
+
+volumes:
+  database:

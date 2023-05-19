@@ -11,6 +11,7 @@
     <groupId>com.example</groupId>
     <artifactId>RESTproject</artifactId>
     <name>RESTproject</name>
+    <version>1</version>
     <description>RESTproject</description>
     <properties>
         <java.version>17</java.version>
